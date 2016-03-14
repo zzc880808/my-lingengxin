@@ -42,7 +42,7 @@ var Index = function(){
             // '在爱情的世界里，林更新是受虐狂？',
             // '林更新高调表白，我委婉拒绝！',
 
-            '分享 林更新 的微博',
+            '林更新：这一次我是认真的，有些话不得不说',
             '肿么办！要林更新还是要免单？好难选',
             '林更新密友再更新，公开表白视频',
             '林更新进军歌坛？白色情人节首曝痴心单曲'
@@ -80,8 +80,8 @@ var Index = function(){
 
         // stage3
         $('#Jstage4btnA').bind('touchend',function(){
-            // if(_isWx){
-            if(true){
+            if(_isWx){
+            // if(true){
                 // showEle($('#NIE-share-m'));
                 $('.new-share-pop').show();
             }else{

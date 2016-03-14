@@ -42,7 +42,13 @@ var Index = function(){
             // '在爱情的世界里，林更新是受虐狂？',
             // '林更新高调表白，我委婉拒绝！',
 
-            '林更新：长得好看还这么主动表白的一定是我',
+            '分享 林更新 的微博',
+            '肿么办！要林更新还是要免单？好难选',
+            '林更新密友再更新，公开表白视频',
+            '林更新进军歌坛？白色情人节首曝痴心单曲'
+        ],
+        _shareDesc = [
+            '这一次我是认真的，有些话一次说………',
             '肿么办！要林更新还是要免单？好难选',
             '林更新密友再更新，公开表白视频',
             '林更新进军歌坛？白色情人节首曝痴心单曲'
@@ -53,10 +59,10 @@ var Index = function(){
             // 'http://www.huihaicenter.com/www/projects/dhxy-lgx/img/weibo.jpg',
             // 'http://www.huihaicenter.com/www/projects/dhxy-lgx/img/xinwen.jpg',
 
-            'http://www.huihaicenter.com/www/projects/dhxy-lgx/img/weibo.jpg',
-            'http://www.huihaicenter.com/www/projects/dhxy-lgx/img/kaola.jpg',
-            'http://www.huihaicenter.com/www/projects/dhxy-lgx/img/xinwen.jpg',
-            'http://www.huihaicenter.com/www/projects/dhxy-lgx/img/yinyue.jpg'
+            'http://www.huihaicenter.com/www/projects/dhxy-lgx/img/share-weibo.jpg',
+            'http://www.huihaicenter.com/www/projects/dhxy-lgx/img/share-kaola.jpg',
+            'http://www.huihaicenter.com/www/projects/dhxy-lgx/img/share-xinwen.jpg',
+            'http://www.huihaicenter.com/www/projects/dhxy-lgx/img/share-yinyue.jpg'
 
         ],
     init = function(){
@@ -74,8 +80,10 @@ var Index = function(){
 
         // stage3
         $('#Jstage4btnA').bind('touchend',function(){
-            if(_isWx){
-                showEle($('#NIE-share-m'));
+            // if(_isWx){
+            if(true){
+                // showEle($('#NIE-share-m'));
+                $('.new-share-pop').show();
             }else{
                 showTips('请在微信客户端打开分享~');
             }
@@ -107,13 +115,17 @@ var Index = function(){
         var hour   = time.getHours();
         var minute = time.getMinutes();
 
-        hour   = (hour < 10   ? '0' + hour : hour);
-        minute = (minute < 10 ? '0' + minute : minute);
+        var time = '<p>' + hour + ':' + minute + '</p>';
 
-        var time = '<p>' + hour + ':' + minute + '</p>' +
-                month + '月' + date + '日 星期' + day;
+        $('.stage-time .time-num1').addClass('type-' + Math.floor(hour / 10));
+        $('.stage-time .time-num2').addClass('type-' + hour % 10);
 
-        $('.stage-time').html(time);
+        $('.stage-time .time-num3').addClass('type-' + Math.floor(minute / 10));
+        $('.stage-time .time-num4').addClass('type-' + minute % 10);
+
+        var date = month + '月' + date + '日 星期' + day;
+
+        $('.stage-time p').html(date);
     },
     showAppMess = function(){
         var len = $stages.eq(0).find('.m-mess').length,
@@ -182,7 +194,7 @@ var Index = function(){
                     return;
                 }
                 addmess();
-            },1500);
+            },1000);
         },500)
 
         function addmess(){
@@ -485,13 +497,19 @@ var Index = function(){
     shareSDK = {
         _info: {
             shareTitle: _shareTxt[randInt],
-            descContent: $('#share_desc').html(),
+            descContent: _shareDesc[randInt],
             shareTimeTitle: _shareTxt[randInt],
             imgUrl: _shareImage[randInt],
             lineLink: window.location.href
         },
 
-        _doneCbk: null,
+        _doneCbk: function() {
+            _czc && _czc.push(["_trackEvent",'share','分享']);
+            setTimeout(function() {
+                window.location.href = 'http://xyq.163.com/2016/xrqs/';
+            }, 1500);
+
+        },
 
         _doneShareFriend: function() {
             // nie.config.stats.url.add('1/targetname.html?click=share', '分享给好友');
@@ -618,6 +636,44 @@ new ImageLoader(["img/logo.png","img/bg00.jpg","img/bg01.jpg","img/bg02.png","im
         $('#loading').remove();
         Index.init();
     },300)
+
+    $('.new-share-pop').on('touchstart', function(e) {
+        e.stopPropagation();
+        $(this).hide();
+        return false;
+    });
+
+    setTimeout(function() {
+
+        function getQueryString(name) {
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i'),
+                r = window.location.search.substr(1).match(reg);
+            return (r != null) ? unescape(r[2]) : null;
+        }
+
+        if (getQueryString('czcfrom') === 'weixin') {
+            _czc && _czc.push(["_trackEvent",'weixin','访问']);
+
+        } else if (getQueryString('czcfrom') === 'weixin2') {
+            _czc && _czc.push(["_trackEvent",'weixin2','访问']);
+
+        } else if (getQueryString('czcfrom') === 'weixin3') {
+            _czc && _czc.push(["_trackEvent",'weixin3','访问']);
+
+        } else if (getQueryString('czcfrom') === 'weixin4') {
+            _czc && _czc.push(["_trackEvent",'weixin4','访问']);
+
+        } else if (getQueryString('czcfrom') === 'weibo') {
+            _czc && _czc.push(["_trackEvent",'weibo','访问']);
+
+        } else if (getQueryString('czcfrom') === 'yixin') {
+            _czc && _czc.push(["_trackEvent",'yixin','访问']);
+
+        } else {
+            _czc && _czc.push(["_trackEvent",'home','访问']);
+        }
+
+    }, 3000);
 
 }, function(pct) {
     $('#loading .tip span').html(Math.floor(pct * 100));

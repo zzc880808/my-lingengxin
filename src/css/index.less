@@ -203,12 +203,76 @@ body{
         margin: 0 auto;
         padding-bottom: 0.3rem;
         width: 90%;
-        p{
-            text-align: center;
-            font-size: 1.6rem;
-            font-family: Arial;
-            font-weight: normal;
+        text-align: center;
+
+        .time-num {
+          display: inline-block;
+          width: 1.1rem;
+          height: 2rem;
+          &.type-0 {
+            background: url(../img/num-0.png);
+            background-size: 100% 100%;
+          }
+          &.type-1 {
+            width: 0.77rem;
+            background: url(../img/num-1.png);
+            background-size: 100% 100%;
+          }
+          &.type-2 {
+            background: url(../img/num-2.png);
+            background-size: 100% 100%;
+          }
+          &.type-3 {
+            background: url(../img/num-3.png);
+            background-size: 100% 100%;
+          }
+          &.type-4 {
+            background: url(../img/num-4.png);
+            background-size: 100% 100%;
+          }
+          &.type-5 {
+            background: url(../img/num-5.png);
+            background-size: 100% 100%;
+          }
+          &.type-6 {
+            background: url(../img/num-6.png);
+            background-size: 100% 100%;
+          }
+          &.type-7 {
+            background: url(../img/num-7.png);
+            background-size: 100% 100%;
+          }
+          &.type-8 {
+            background: url(../img/num-8.png);
+            background-size: 100% 100%;
+          }
+          &.type-9 {
+            background: url(../img/num-9.png);
+            background-size: 100% 100%;
+          }
         }
+
+        .time-dot {
+          display: inline-block;
+          width: 0.125rem;
+          height: 2rem;
+          background: url(../img/num-dot.png);
+          background-size: 100% 100%;
+        }
+
+
+        // p{
+        //     text-align: center;
+        //     font-size: 1.6rem;
+        //     font-family: Arial;
+        //     font-weight: normal;
+        // }
+        p {
+          width: 100%;
+          margin: 0 auto;
+          text-align: center;
+        }
+
     }
     .m-mess{
         width:90%;
@@ -1020,6 +1084,26 @@ body{
         &.show{
             opacity: 1;
         }
+    }
+}
+
+.new-share-pop {
+    display    : none;
+    position   : fixed;
+    z-index    : 999999;
+    left       : 0;
+    top        : 0;
+    right      : 0;
+    bottom     : 0;
+    background : rgba(0,0,0,.7);
+    .share-pop-content {
+        position   : absolute;
+        width      : 7.5rem;
+        height     : 3rem;
+        left       : 0;
+        top        : 0;
+        background : url(../img/share-tip.png);
+        background-size: 100% 100%;
     }
 }
 
